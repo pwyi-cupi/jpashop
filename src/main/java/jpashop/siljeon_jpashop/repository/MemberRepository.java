@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberRepository {
 
-    public final EntityManager em;
+    private final EntityManager em;
 
     public void save(Member member){
         em.persist(member);
