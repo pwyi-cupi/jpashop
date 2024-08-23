@@ -2,12 +2,15 @@ package jpashop.siljeon_jpashop.domain;
 
 import jakarta.persistence.*;
 import jpashop.siljeon_jpashop.domain.Item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter
 @Table(name="order_item")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
     @Id @GeneratedValue
@@ -23,4 +26,27 @@ public class OrderItem {
     private Order order;
     private int orderPrice;
     private int count;
+
+    //==생성 메서드==//
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count){  //orderPrice가 곧 item의 price 아닌가 하겠지만 쿠폰이나 할인이 있을 수 있으므로 orderPrice가 있는 것
+        OrderItem orderItem=new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    //==비즈니스 로직==//
+    /* 주문 취소 */
+    public void cancel() {
+        getItem().addStock(count);   //item.addStock(count)로 하면 안되나???
+    }
+
+    //==조회 로직==//
+    /* 주문 상품 금액 조회 */
+    public int getTotalPrice(){
+        return getOrderPrice() * getCount();
+    }
+
 }
