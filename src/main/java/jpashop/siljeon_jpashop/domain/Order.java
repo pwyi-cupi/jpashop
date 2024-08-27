@@ -48,11 +48,11 @@ public class Order {
     }
 
     //==생성 메서드==//
-    public static Order createOrder(Member member, Delivery delivery, OrderItem orderitem){
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderitems){
         Order order=new Order();
         order.setMember(member);
         order.setDelivery(delivery);
-        //for(OrderItem orderitem : orderitems)
+        for(OrderItem orderitem : orderitems)
             order.addOrderItem(orderitem);
         order.setOrderDate(LocalDateTime.now());
         order.setStatus(OrderStatus.ORDER);

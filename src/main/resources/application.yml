@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none #create은 실행할 때마다 데이터를 다시 생성하고 drop함 / none은 넣어놓은 데이터를 계속 볼 수 있음
+      ddl-auto: create #create은 실행할 때마다 데이터를 다시 생성하고 drop함 / none은 넣어놓은 데이터를 계속 볼 수 있음
     properties:
       hibernate:
 #        show_sql: true  얘는 System.out으로 출력하는 애 -> 로거로만 출력하기
